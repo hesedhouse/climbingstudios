@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+# www → apex (canonical)
+https://www.climbingstudios.com/* https://climbingstudios.com/:splat 301

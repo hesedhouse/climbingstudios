@@ -1,0 +1,10 @@
+# Cloudflare Pages headers
+# Security + AI crawler friendly
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
