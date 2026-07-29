@@ -120,7 +120,7 @@ async function generatePost(category, existingTitles) {
   const existingList = existingTitles.slice(-20).map(t => `- ${t}`).join("\n");
 
   const response = await client.messages.create({
-    model: "claude-sonnet-4-20250514",
+    model: "claude-sonnet-4-6",
     max_tokens: 4000,
     messages: [{
       role: "user",
