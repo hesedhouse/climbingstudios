@@ -279,11 +279,7 @@ section{padding:96px 0;position:relative}
 /* FAQ (= BETA) */
 #faq{background:var(--concrete-2)}
 .faq-list{display:flex;flex-direction:column;border-top:2px solid var(--line)}
-.faq-item{border-bottom:2px solid var(--line);padding:30px 4px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;transition:.18s}
-.faq-item:hover{background:var(--panel);padding-left:18px;padding-right:18px}
-.faq-item::before{content:'Q';font-family:var(--disp);font-size:30px;color:var(--primary);line-height:1}
 .faq-q{font-family:var(--kr);font-weight:800;font-size:19px;letter-spacing:-.3px}
-.faq-a{grid-column:2;color:var(--fog);font-size:15.5px;line-height:1.85;margin-top:12px}
 
 /* CONTACT */
 .contact{border-top:2px solid var(--line)}
@@ -311,15 +307,102 @@ footer{border-top:2px solid var(--line);padding:30px 0}
 .footin{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--fog)}
 .footin .made{color:var(--fog)}
 
-/* 진입 애니메이션 */
+/* 진입 애니메이션 (legacy, kept for compatibility) */
 .reveal{opacity:0;transform:translateY(18px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
 .d1{animation-delay:.05s}.d2{animation-delay:.14s}.d3{animation-delay:.24s}.d4{animation-delay:.34s}.d5{animation-delay:.44s}
 @keyframes rise{to{opacity:1;transform:none}}
 @media(max-width:600px){.hero{padding:48px 0 44px}section{padding:64px 0}.svc-card{padding:28px 22px}}
 @media(prefers-reduced-motion:reduce){.ticker .track{animation:none}.reveal{animation:none;opacity:1;transform:none}}
+
+/* ========== SCROLL PROGRESS BAR ========== */
+.scroll-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--primary);z-index:999;pointer-events:none;transition:none}
+
+/* ========== CUSTOM CURSOR ========== */
+.cursor-dot{position:fixed;width:28px;height:28px;border:2px solid var(--chalk);border-radius:50%;pointer-events:none;
+  z-index:9998;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s;will-change:transform}
+.cursor-dot.grow{width:56px;height:56px;border-color:var(--primary)}
+@media(max-width:768px),(hover:none),(pointer:coarse){.cursor-dot{display:none!important}}
+
+/* ========== SCROLL REVEAL ANIMATIONS ========== */
+.reveal-up,.reveal-left,.reveal-right,.reveal-scale{opacity:0;will-change:transform,opacity;transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal-up{transform:translateY(40px)}
+.reveal-left{transform:translateX(-40px)}
+.reveal-right{transform:translateX(40px)}
+.reveal-scale{transform:scale(.92)}
+.reveal-up.visible,.reveal-left.visible,.reveal-right.visible,.reveal-scale.visible{opacity:1;transform:none}
+
+/* ========== FAQ ACCORDION ========== */
+.faq-item{cursor:pointer;border-bottom:2px solid var(--line);padding:0;display:block;transition:background .18s,padding .18s}
+.faq-item:hover{background:var(--panel)}
+.faq-header{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding:30px 4px}
+.faq-item:hover .faq-header{padding-left:18px;padding-right:18px}
+.faq-header .faq-q-mark{font-family:var(--disp);font-size:30px;color:var(--primary);line-height:1}
+.faq-toggle{font-family:var(--disp);font-size:26px;color:var(--fog);transition:transform .35s cubic-bezier(.2,.7,.2,1);line-height:1;user-select:none}
+.faq-item.open .faq-toggle{transform:rotate(45deg);color:var(--primary)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.7,.2,1),padding .35s;padding:0 4px 0 calc(30px + 24px + 4px);color:var(--fog);font-size:15.5px;line-height:1.85}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:30px}
+
+/* ========== 3D TILT CARD ========== */
+.svc-card{transform-style:preserve-3d;perspective:600px}
+.svc-card .card-glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(circle at var(--glow-x,50%) var(--glow-y,50%),rgba(232,255,53,.12),transparent 60%)}
+.svc-card:hover .card-glow{opacity:1}
+
+/* ========== HERO GLITCH ========== */
+.giant{position:relative}
+.giant h1-wrap{position:relative;display:inline-block}
+.giant::before,.giant::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0;font-family:inherit;font-size:inherit;line-height:inherit;letter-spacing:inherit;text-transform:inherit}
+.giant.glitch::before{opacity:.7;color:cyan;clip-path:polygon(0 0,100% 0,100% 33%,0 33%);transform:translate(-3px,-2px);animation:glitch-1 .3s steps(2) 1}
+.giant.glitch::after{opacity:.7;color:red;clip-path:polygon(0 66%,100% 66%,100% 100%,0 100%);transform:translate(3px,2px);animation:glitch-2 .3s steps(2) 1}
+@keyframes glitch-1{0%{clip-path:polygon(0 15%,100% 15%,100% 30%,0 30%);transform:translate(-4px,-1px)}50%{clip-path:polygon(0 55%,100% 55%,100% 70%,0 70%);transform:translate(3px,2px)}100%{clip-path:polygon(0 85%,100% 85%,100% 95%,0 95%);transform:translate(-2px,1px)}}
+@keyframes glitch-2{0%{clip-path:polygon(0 40%,100% 40%,100% 55%,0 55%);transform:translate(4px,1px)}50%{clip-path:polygon(0 10%,100% 10%,100% 25%,0 25%);transform:translate(-3px,-2px)}100%{clip-path:polygon(0 70%,100% 70%,100% 80%,0 80%);transform:translate(2px,-1px)}}
+
+/* ========== MAGNETIC BUTTONS ========== */
+.btn{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .16s,background .16s,color .16s,border-color .16s}
+
+/* ========== NUMBERS STATS SECTION ========== */
+#numbers{background:var(--concrete-2);border-bottom:2px solid var(--line)}
+.num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--line)}
+@media(max-width:600px){.num-grid{grid-template-columns:repeat(2,1fr)}}
+.num-card{padding:44px 30px;border-right:2px solid var(--line);text-align:center;position:relative}
+.num-card:last-child{border-right:none}
+@media(max-width:600px){.num-card:nth-child(2){border-right:none}.num-card:nth-child(1),.num-card:nth-child(2){border-bottom:2px solid var(--line)}}
+.num-val{font-family:var(--disp);font-size:clamp(48px,8vw,80px);color:var(--primary);line-height:1}
+.num-unit{font-family:var(--mono);font-size:13px;color:var(--fog);letter-spacing:1px;margin-top:4px}
+.num-label{font-family:var(--mono);font-size:12px;color:var(--fog);letter-spacing:1px;text-transform:uppercase;margin-top:16px;opacity:.7}
+
+/* ========== GRADE TOOLTIPS ========== */
+.grades{position:relative}
+.grades span{cursor:pointer;transition:background .18s,color .18s;position:relative}
+.grades span:hover{background:rgba(232,255,53,.18)}
+.grade-tooltip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);
+  background:var(--panel);color:var(--chalk);font-family:var(--kr);font-size:13px;padding:8px 14px;
+  border:1px solid var(--line);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:10}
+.grade-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:var(--panel)}
+.grades span:hover .grade-tooltip{opacity:1}
+
+/* ========== PARALLAX HERO ========== */
+.hero::before{transition:none;will-change:transform}
+
+/* ========== REDUCED MOTION ========== */
+@media(prefers-reduced-motion:reduce){
+  .reveal-up,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none;transition:none}
+  .cursor-dot{display:none!important}
+  .scroll-progress{display:none}
+  .giant::before,.giant::after{display:none}
+  .svc-card{perspective:none;transform:none!important}
+  .faq-a{transition:none}
+  .btn{transition:none}
+}
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS BAR -->
+<div class="scroll-progress" aria-hidden="true"></div>
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" aria-hidden="true"></div>
 
 <!-- TICKER -->
 <div class="ticker" aria-hidden="true">
@@ -343,15 +426,15 @@ footer{border-top:2px solid var(--line);padding:30px 0}
 <header class="hero" id="top">
   <div class="wrap hero-in">
     <div class="hero-tag reveal d1"><span class="bar"></span><span class="mono">01 — 일산서구 덕이동 / 실내 클라이밍</span></div>
-    <h1 class="giant reveal d2">HIGHFLEX<span class="stroke">HIGHFLEX</span></h1>
+    <h1 class="giant reveal d2" data-text="HIGHFLEX">HIGHFLEX<span class="stroke">HIGHFLEX</span></h1>
     <div class="hero-kr reveal d3">클라이밍 하이프렉스 · <em>벽을 오르다</em></div>
     <p class="hero-lead reveal d3">일산 최대 규모의 실내 클라이밍 짐 클라이밍 하이프렉스. 볼더링과 리드 클라이밍을 한 곳에서. 초보부터 선수까지, 매주 새로 세팅되는 다양한 난이도와 친절한 강습으로 누구나 즐기는 클라이밍을 제공합니다.</p>
     <div class="hero-btns reveal d4">
       <a href="https://naver.me/5cqNzVeB" class="btn btn-pri" target="_blank" rel="noopener">네이버 예약 →</a>
       <a href="tel:031-922-8848" class="btn btn-ghost">전화 031-922-8848</a>
     </div>
-    <div class="grades reveal d5" aria-hidden="true">
-      <span>V0</span><span>V1</span><span>V2</span><span class="on">V3</span><span>V4</span><span>V5</span><span>V6</span><span>V7</span><span>V8</span>
+    <div class="grades reveal d5">
+      <span data-desc="입문 - 사다리처럼 큰 홀드">V0<span class="grade-tooltip">입문 - 사다리처럼 큰 홀드</span></span><span data-desc="초보 - 기본 발 디딤">V1<span class="grade-tooltip">초보 - 기본 발 디딤</span></span><span data-desc="초급 - 경사면 시작">V2<span class="grade-tooltip">초급 - 경사면 시작</span></span><span class="on" data-desc="중급 입문 - 다이노 동작">V3<span class="grade-tooltip">중급 입문 - 다이노 동작</span></span><span data-desc="중급 - 핀치·슬로퍼 난이도">V4<span class="grade-tooltip">중급 - 핀치/슬로퍼</span></span><span data-desc="중상급 - 힐훅·토훅 필수">V5<span class="grade-tooltip">중상급 - 힐훅/토훅 필수</span></span><span data-desc="상급 - 크림프 지옥">V6<span class="grade-tooltip">상급 - 크림프 지옥</span></span><span data-desc="고급 - 캠퍼스 무브">V7<span class="grade-tooltip">고급 - 캠퍼스 무브</span></span><span data-desc="선수급 - 극한 난이도">V8<span class="grade-tooltip">선수급 - 극한 난이도</span></span>
     </div>
   </div>
 </header>
@@ -359,24 +442,28 @@ footer{border-top:2px solid var(--line);padding:30px 0}
 <!-- SERVICES -->
 <section id="services">
   <div class="wrap">
-    <div class="sec-head"><h2>On The Wall</h2><div class="idx">[ 02 / 프로그램 ]</div></div>
+    <div class="sec-head reveal-up"><h2>On The Wall</h2><div class="idx">[ 02 / 프로그램 ]</div></div>
     <div class="svc-grid">
-      <div class="svc-card">
+      <div class="svc-card reveal-scale">
+        <div class="card-glow"></div>
         <div class="svc-num">01</div>
         <h3 class="svc-title">볼더링</h3>
         <p class="svc-desc">매주 새로 세팅되는 V0~V8 난이도. 초보 전용 존부터 선수 트레이닝 존까지. 로프 없이 매트 위에서 짧고 강렬한 문제를 풀어보세요.</p>
       </div>
-      <div class="svc-card">
+      <div class="svc-card reveal-scale">
+        <div class="card-glow"></div>
         <div class="svc-num">02</div>
         <h3 class="svc-title">리드 클라이밍</h3>
         <p class="svc-desc">10m 이상의 높은 벽을 로프와 함께. 난이도 5.8~5.13+. 지구력과 전략적 루트 리딩 능력을 키울 수 있습니다.</p>
       </div>
-      <div class="svc-card">
+      <div class="svc-card reveal-scale">
+        <div class="card-glow"></div>
         <div class="svc-num">03</div>
         <h3 class="svc-title">원데이 클래스</h3>
         <p class="svc-desc">장비·신발 무료 대여. 처음 오신 분도 강사와 1시간이면 첫 완등. 단체·팀빌딩·생일 파티도 가능.</p>
       </div>
-      <div class="svc-card">
+      <div class="svc-card reveal-scale">
+        <div class="card-glow"></div>
         <div class="svc-num">04</div>
         <h3 class="svc-title">정기 강습 · 멤버십</h3>
         <p class="svc-desc">주 1·2회 4주 과정. 자세 교정부터 무브 응용까지. 월 무제한 멤버십으로 자유롭게 등반하세요.</p>
@@ -385,41 +472,102 @@ footer{border-top:2px solid var(--line);padding:30px 0}
   </div>
 </section>
 
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="wrap">
+    <div class="sec-head reveal-up"><h2>By The Numbers</h2><div class="idx">[ 02.5 / 숫자로 보는 하이프렉스 ]</div></div>
+    <div class="num-grid">
+      <div class="num-card reveal-scale">
+        <div class="num-val" data-count="12">0</div>
+        <div class="num-unit">m</div>
+        <div class="num-label">벽 높이</div>
+      </div>
+      <div class="num-card reveal-scale">
+        <div class="num-val" data-count="40">0</div>
+        <div class="num-unit">개 루트</div>
+        <div class="num-label">난이도</div>
+      </div>
+      <div class="num-card reveal-scale">
+        <div class="num-val" data-text="매주">-</div>
+        <div class="num-unit">&nbsp;</div>
+        <div class="num-label">주간 리세팅</div>
+      </div>
+      <div class="num-card reveal-scale">
+        <div class="num-val" data-count="7">0</div>
+        <div class="num-unit">년차</div>
+        <div class="num-label">운영</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ / BETA -->
 <section id="faq">
   <div class="wrap">
-    <div class="sec-head"><h2>Beta</h2><div class="idx">[ 03 / 자주 묻는 질문 ]</div></div>
+    <div class="sec-head reveal-up"><h2>Beta</h2><div class="idx">[ 03 / 자주 묻는 질문 ]</div></div>
     <div class="faq-list">
-      <div class="faq-item">
-        <h3 class="faq-q">클라이밍 처음인데 가도 되나요?</h3>
+      <div class="faq-item reveal-up">
+        <div class="faq-header">
+          <span class="faq-q-mark">Q</span>
+          <h3 class="faq-q">클라이밍 처음인데 가도 되나요?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
         <div class="faq-a">네, 방문객의 절반 이상이 처음 오시는 분입니다. 원데이 클래스에서 강사가 기초부터 알려드리며, 장비와 신발은 무료로 대여해 드립니다.</div>
       </div>
-      <div class="faq-item">
-        <h3 class="faq-q">클라이밍 하이프렉스는 일산 어디에 있나요?</h3>
+      <div class="faq-item reveal-up">
+        <div class="faq-header">
+          <span class="faq-q-mark">Q</span>
+          <h3 class="faq-q">클라이밍 하이프렉스는 일산 어디에 있나요?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
         <div class="faq-a">경기도 고양시 일산서구 덕이로 20, 1E동 B1에 위치해 있습니다. 건물 내 주차장이 있어 자가용으로 편하게 방문하실 수 있습니다. 전화번호 031-922-8848로 문의하세요.</div>
       </div>
-      <div class="faq-item">
-        <h3 class="faq-q">볼더링과 리드 클라이밍의 차이가 무엇인가요?</h3>
+      <div class="faq-item reveal-up">
+        <div class="faq-header">
+          <span class="faq-q-mark">Q</span>
+          <h3 class="faq-q">볼더링과 리드 클라이밍의 차이가 무엇인가요?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
         <div class="faq-a">볼더링은 4~5m 높이의 벽을 로프 없이 매트 위에서 오르는 종목이고, 리드 클라이밍은 10m 이상의 벽을 로프를 확보하며 올라가는 종목입니다. 볼더링은 순간적인 힘과 테크닉이, 리드는 지구력과 루트 파악이 중요합니다. 하이프렉스에서는 두 종목 모두 즐기실 수 있습니다.</div>
       </div>
-      <div class="faq-item">
-        <h3 class="faq-q">운동복이나 준비물이 필요한가요?</h3>
+      <div class="faq-item reveal-up">
+        <div class="faq-header">
+          <span class="faq-q-mark">Q</span>
+          <h3 class="faq-q">운동복이나 준비물이 필요한가요?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
         <div class="faq-a">편한 운동복만 입고 오시면 됩니다. 클라이밍 신발과 초크 등 장비는 모두 현장에서 대여 가능합니다. 긴 손톱은 미리 정리해 주시고, 반지·팔찌는 벗고 등반하시는 것을 권장합니다.</div>
       </div>
-      <div class="faq-item">
-        <h3 class="faq-q">혼자 가도 즐길 수 있나요?</h3>
+      <div class="faq-item reveal-up">
+        <div class="faq-header">
+          <span class="faq-q-mark">Q</span>
+          <h3 class="faq-q">혼자 가도 즐길 수 있나요?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
         <div class="faq-a">물론입니다. 혼자 오시는 분이 많고, 같은 난이도를 등반하는 분들과 자연스럽게 어울릴 수 있는 분위기입니다.</div>
       </div>
-      <div class="faq-item">
-        <h3 class="faq-q">단체 체험이나 팀빌딩도 가능한가요?</h3>
+      <div class="faq-item reveal-up">
+        <div class="faq-header">
+          <span class="faq-q-mark">Q</span>
+          <h3 class="faq-q">단체 체험이나 팀빌딩도 가능한가요?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
         <div class="faq-a">네, 기업 팀빌딩, 생일 파티, 단체 체험 등 다양한 그룹 프로그램을 운영합니다. 인원과 일정에 맞춰 구성해 드리니, 전화(031-922-8848)로 사전 예약 부탁드립니다.</div>
       </div>
-      <div class="faq-item">
-        <h3 class="faq-q">클라이밍은 어떤 운동 효과가 있나요?</h3>
+      <div class="faq-item reveal-up">
+        <div class="faq-header">
+          <span class="faq-q-mark">Q</span>
+          <h3 class="faq-q">클라이밍은 어떤 운동 효과가 있나요?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
         <div class="faq-a">전신 근력, 악력, 유연성, 균형 감각을 동시에 발달시키는 종합 운동입니다. 칼로리 소모량도 높아 다이어트에 효과적이고, 루트를 분석하는 과정에서 문제 해결 능력과 집중력도 향상됩니다.</div>
       </div>
-      <div class="faq-item">
-        <h3 class="faq-q">이용 요금은 어떻게 되나요?</h3>
+      <div class="faq-item reveal-up">
+        <div class="faq-header">
+          <span class="faq-q-mark">Q</span>
+          <h3 class="faq-q">이용 요금은 어떻게 되나요?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
         <div class="faq-a">1일권, 4주 강습 과정, 월 무제한 멤버십 등 다양한 옵션이 있습니다. 정확한 금액은 전화(031-922-8848) 또는 인스타그램 DM으로 문의해 주세요.</div>
       </div>
     </div>
@@ -429,7 +577,7 @@ footer{border-top:2px solid var(--line);padding:30px 0}
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="contact-grid">
+    <div class="contact-grid reveal-up">
       <div class="c-left">
         <h2>GET ON<span class="hz">THE WALL</span></h2>
         <div class="spec">
@@ -459,6 +607,228 @@ footer{border-top:2px solid var(--line);padding:30px 0}
     <div class="made">Powered by MindScope GEO</div>
   </div>
 </footer>
+
+<script>
+(function(){
+  'use strict';
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ========== 1. SCROLL PROGRESS BAR ========== */
+  const progressBar = document.querySelector('.scroll-progress');
+  function updateProgress(){
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+
+  /* ========== 2. CUSTOM CURSOR ========== */
+  const cursor = document.querySelector('.cursor-dot');
+  let curX = 0, curY = 0, cx = 0, cy = 0;
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if(!isTouchDevice && cursor){
+    document.addEventListener('mousemove', function(e){ curX = e.clientX; curY = e.clientY; });
+    const interactiveSelector = 'a, button, .btn, .svc-card, .faq-item, .grades span, .navcta, input, textarea';
+    document.addEventListener('mouseover', function(e){
+      if(e.target.closest(interactiveSelector)) cursor.classList.add('grow');
+    });
+    document.addEventListener('mouseout', function(e){
+      if(e.target.closest(interactiveSelector)) cursor.classList.remove('grow');
+    });
+    function animateCursor(){
+      cx += (curX - cx) * 0.15;
+      cy += (curY - cy) * 0.15;
+      cursor.style.transform = 'translate(' + (cx - 14) + 'px,' + (cy - 14) + 'px)';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+  } else if(cursor){
+    cursor.style.display = 'none';
+  }
+
+  /* ========== 3. SCROLL-TRIGGERED REVEAL ========== */
+  if(!prefersReducedMotion){
+    const revealEls = document.querySelectorAll('.reveal-up,.reveal-left,.reveal-right,.reveal-scale');
+    const revealObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          // stagger siblings
+          const parent = entry.target.parentElement;
+          const siblings = parent.querySelectorAll('.reveal-up,.reveal-left,.reveal-right,.reveal-scale');
+          let idx = 0;
+          siblings.forEach(function(s){
+            if(s.parentElement === parent){
+              if(s === entry.target || !s.classList.contains('visible')){
+                s.style.transitionDelay = (idx * 0.08) + 's';
+                s.classList.add('visible');
+              }
+              idx++;
+            }
+          });
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el){ revealObs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal-up,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){
+      el.classList.add('visible');
+    });
+  }
+
+  /* ========== 4. FAQ ACCORDION ========== */
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function(item){
+    var header = item.querySelector('.faq-header');
+    if(!header) return;
+    header.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      // close all
+      faqItems.forEach(function(fi){ fi.classList.remove('open'); });
+      // toggle clicked
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ========== 5. SERVICE CARD 3D TILT ========== */
+  if(!isTouchDevice && !prefersReducedMotion){
+    var svcCards = document.querySelectorAll('.svc-card');
+    svcCards.forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var midX = rect.width / 2;
+        var midY = rect.height / 2;
+        var rotY = ((x - midX) / midX) * 6;
+        var rotX = ((midY - y) / midY) * 6;
+        card.style.transform = 'perspective(600px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+        // glow position
+        var glow = card.querySelector('.card-glow');
+        if(glow){
+          var px = (x / rect.width * 100).toFixed(1);
+          var py = (y / rect.height * 100).toFixed(1);
+          glow.style.setProperty('--glow-x', px + '%');
+          glow.style.setProperty('--glow-y', py + '%');
+        }
+      });
+      card.addEventListener('mouseleave', function(){
+        card.style.transform = 'perspective(600px) rotateX(0) rotateY(0)';
+        card.style.transition = 'transform .4s cubic-bezier(.2,.7,.2,1)';
+        setTimeout(function(){ card.style.transition = ''; }, 400);
+      });
+    });
+  }
+
+  /* ========== 6. HERO GLITCH EFFECT ========== */
+  if(!prefersReducedMotion){
+    var giant = document.querySelector('.giant');
+    if(giant){
+      giant.addEventListener('mouseenter', function(){
+        giant.classList.add('glitch');
+      });
+      giant.addEventListener('animationend', function(){
+        giant.classList.remove('glitch');
+      });
+      // remove after timeout fallback
+      giant.addEventListener('mouseenter', function(){
+        setTimeout(function(){ giant.classList.remove('glitch'); }, 350);
+      });
+    }
+  }
+
+  /* ========== 7. MAGNETIC BUTTONS ========== */
+  if(!isTouchDevice && !prefersReducedMotion){
+    var btns = document.querySelectorAll('.btn');
+    btns.forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var rect = btn.getBoundingClientRect();
+        var bx = rect.left + rect.width / 2;
+        var by = rect.top + rect.height / 2;
+        var dx = e.clientX - bx;
+        var dy = e.clientY - by;
+        var dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < 80){
+          var pull = (1 - dist / 80) * 8;
+          btn.style.transform = 'translate(' + (dx * pull / 80) + 'px,' + (dy * pull / 80) + 'px)';
+        }
+      });
+      btn.addEventListener('mouseleave', function(){
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  /* ========== 8. NUMBERS COUNT-UP ========== */
+  var numVals = document.querySelectorAll('.num-val[data-count]');
+  var numAnimated = new Set();
+  function animateCount(el){
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var duration = 1600;
+    var start = performance.now();
+    function step(now){
+      var elapsed = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased);
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  // handle text-only num-vals
+  var numTexts = document.querySelectorAll('.num-val[data-text]');
+  var textAnimated = new Set();
+
+  var numObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var el = entry.target;
+        if(el.hasAttribute('data-count') && !numAnimated.has(el)){
+          numAnimated.add(el);
+          animateCount(el);
+        }
+        if(el.hasAttribute('data-text') && !textAnimated.has(el)){
+          textAnimated.add(el);
+          el.textContent = el.getAttribute('data-text');
+        }
+        numObs.unobserve(el);
+      }
+    });
+  }, {threshold:0.5});
+  numVals.forEach(function(el){ numObs.observe(el); });
+  numTexts.forEach(function(el){ numObs.observe(el); });
+
+  /* ========== 9. HERO PARALLAX ========== */
+  if(!prefersReducedMotion){
+    var hero = document.querySelector('.hero');
+    if(hero){
+      window.addEventListener('scroll', function(){
+        var scrollY = window.scrollY;
+        var heroH = hero.offsetHeight;
+        if(scrollY < heroH * 1.5){
+          hero.style.setProperty('--parallax-y', (scrollY * 0.35) + 'px');
+        }
+      }, {passive:true});
+      // Apply via CSS custom property on ::before — need to add inline style approach
+      // Since we can't directly style ::before via JS, we use a CSS variable
+      var styleEl = document.createElement('style');
+      styleEl.textContent = '.hero::before{transform:translateY(var(--parallax-y,0))}';
+      document.head.appendChild(styleEl);
+    }
+  }
+
+  /* ========== 10. GRADE SCALE INTERACTION ========== */
+  var gradeSpans = document.querySelectorAll('.grades > span');
+  gradeSpans.forEach(function(span){
+    span.addEventListener('click', function(){
+      // toggle on class
+      span.classList.toggle('on');
+    });
+  });
+
+})();
+</script>
 
 </body>
 </html>
