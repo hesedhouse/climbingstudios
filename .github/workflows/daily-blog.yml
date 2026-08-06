@@ -52,7 +52,6 @@ jobs:
           git push
 
       - name: Deploy to Cloudflare Pages
-        if: steps.check.outputs.has_new == 'true'
         run: npx wrangler pages deploy . --project-name climbingstudios --branch master --commit-dirty=true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
