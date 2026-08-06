@@ -184,13 +184,16 @@ function wrapInPage(title, article, category, date) {
 <meta property="og:url" content="${SITE_URL}/blog/${date}-${makeSlug(title)}.html">
 <meta property="og:site_name" content="클라이밍 하이프렉스">
 <meta name="keywords" content="${category.keywords}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "${title.replace(/"/g, '\\"')}",
+  "headline": "${title.replace(/"/g, '\\\\"')}",
   "datePublished": "${date}",
   "author": {"@type": "Organization", "name": "클라이밍 하이프렉스"},
   "publisher": {"@type": "Organization", "name": "클라이밍 하이프렉스", "url": "${SITE_URL}"},
@@ -198,46 +201,51 @@ function wrapInPage(title, article, category, date) {
 }
 </script>
 <style>
-:root{--bg:#15161A;--surface:#1C1E24;--text:#F3F1EA;--muted:#8A8D95;--line:rgba(243,241,234,.13);--primary:#E8FF35;--accent:#FF3B2F;--on-primary:#0F1013}
+:root{--concrete:#15161A;--concrete-2:#0F1013;--panel:#1B1D23;--chalk:#F3F1EA;--fog:#888B93;--line:rgba(243,241,234,.13);--primary:#E8FF35;--accent:#FF3B2F;--bg:#15161A;--ink:#0F1013;--mono:'Space Mono',ui-monospace,monospace;--disp:'Anton',sans-serif;--kr:'Pretendard',-apple-system,sans-serif;--surface:#1C1E24;--text:#F3F1EA;--muted:#8A8D95;--on-primary:#0F1013}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;-webkit-font-smoothing:antialiased}
+body{font-family:var(--kr);background:var(--bg);color:var(--text);line-height:1.75;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.03;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
-nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(21,22,26,.88);backdrop-filter:blur(10px);z-index:10}
+.ticker{background:var(--primary);color:var(--ink);overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;padding:6px 0;text-transform:uppercase}
+.ticker-track{display:inline-block;animation:ticker-scroll 30s linear infinite}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(21,22,26,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:10}
 .navin{max-width:760px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:900;font-size:18px;letter-spacing:-.5px;color:var(--text)}
-.navlinks{display:flex;gap:18px;font-weight:700;font-size:13px}
-.navlinks a{color:var(--muted)}
-.navlinks a:hover{color:var(--primary);text-decoration:none}
+.brand{font-family:var(--disp);font-size:22px;letter-spacing:1px;color:var(--text);text-transform:uppercase;text-decoration:none}
+.brand .dot{color:var(--primary)}
+.nav-cta{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:8px 18px;background:var(--primary);color:var(--ink);text-decoration:none;transition:.15s}
+.nav-cta:hover{opacity:.88;text-decoration:none;transform:translateY(-1px)}
 .post-wrap{max-width:720px;margin:0 auto;padding:60px 24px 80px}
-article h1{font-size:clamp(26px,4.5vw,38px);font-weight:900;letter-spacing:-1px;line-height:1.3;margin-bottom:8px}
-article .meta{font-size:13px;color:var(--muted);margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--line)}
-article h2{font-size:22px;font-weight:800;margin:36px 0 14px;color:var(--primary);letter-spacing:-.3px}
+article h1{font-family:var(--kr);font-size:clamp(26px,4.5vw,38px);font-weight:900;letter-spacing:-1px;line-height:1.3;margin-bottom:8px}
+article .meta{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--line);letter-spacing:.5px;text-transform:uppercase}
+article h2{font-family:var(--kr);font-size:22px;font-weight:800;margin:36px 0 14px;color:var(--primary);letter-spacing:-.3px}
 article h3{font-size:18px;font-weight:700;margin:28px 0 10px}
 article p{margin-bottom:16px;font-size:16px;color:var(--text)}
 article ul,article ol{margin:12px 0 20px 24px;font-size:15px;color:var(--muted)}
 article li{margin-bottom:6px}
-.back{display:inline-block;margin-top:40px;padding:12px 24px;border:2px solid var(--line);font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.back{display:inline-block;margin-top:40px;padding:12px 24px;border:2px solid var(--line);font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-decoration:none}
 .back:hover{border-color:var(--primary);color:var(--primary);text-decoration:none}
 .cta-reserve{margin-top:48px;padding:32px;background:var(--surface);border:1px solid var(--line);border-radius:16px;text-align:center}
 .cta-reserve p{font-size:15px;color:var(--muted);margin-bottom:16px}
-.cta-reserve .btn{display:inline-block;padding:14px 36px;background:var(--primary);color:var(--on-primary);font-weight:800;font-size:15px;border-radius:8px;text-decoration:none;letter-spacing:-.3px;transition:.15s}
+.cta-reserve .btn{display:inline-block;padding:14px 36px;background:var(--primary);color:var(--on-primary);font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:.15s}
 .cta-reserve .btn:hover{opacity:.88;text-decoration:none;transform:translateY(-1px)}
-footer{border-top:1px solid var(--line);padding:24px;text-align:center;font-size:12px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:24px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.5px}
 </style>
 </head>
 <body>
-<nav><div class="navin"><a href="/" class="brand">HIGHFLEX.</a><div class="navlinks"><a href="/">홈</a><a href="/blog/">블로그</a><a href="tel:031-922-8848">전화</a></div></div></nav>
+<div class="ticker"><div class="ticker-track">CLIMBING HIGH FLEX /// ILSAN BOULDERING /// 031-922-8848 /// CLIMBINGSTUDIOS.COM /// CLIMBING HIGH FLEX /// ILSAN BOULDERING /// 031-922-8848 /// CLIMBINGSTUDIOS.COM /// CLIMBING HIGH FLEX /// ILSAN BOULDERING /// 031-922-8848 /// CLIMBINGSTUDIOS.COM /// CLIMBING HIGH FLEX /// ILSAN BOULDERING /// 031-922-8848 /// CLIMBINGSTUDIOS.COM /// </div></div>
+<nav><div class="navin"><a href="/" class="brand">HIGHFLEX<span class="dot">.</span></a><a href="https://map.naver.com/p/entry/place/1415029947?placePath=%2Fticket" target="_blank" rel="noopener" class="nav-cta">Reserve</a></div></nav>
 <div class="post-wrap">
 ${article}
 <div class="cta-reserve">
   <p>하이프렉스 클라이밍짐이 궁금하다면?</p>
-  <a href="https://map.naver.com/p/entry/place/1415029947?placePath=%2Fticket" target="_blank" rel="noopener" class="btn">네이버 예약하기 →</a>
+  <a href="https://map.naver.com/p/entry/place/1415029947?placePath=%2Fticket" target="_blank" rel="noopener" class="btn">Reserve Now &rarr;</a>
 </div>
-<a href="/blog/" class="back">← 목록으로</a>
+<a href="/blog/" class="back">&larr; All Posts</a>
 </div>
-<footer>© 2026 클라이밍 하이프렉스 — climbingstudios.com</footer>
+<footer>&copy; 2026 CLIMBING HIGHFLEX &mdash; climbingstudios.com</footer>
 </body>
 </html>`;
 }
@@ -256,7 +264,7 @@ function regenerateIndex() {
     const descMatch = content.match(/<meta name="description" content="([^"]+)"/);
     const catMatch = content.match(/<time>[^<]+<\/time>\s*·\s*([^<]+)/);
     return `      <a href="/blog/${f}" class="post-card">
-        <div class="date">${dateMatch?.[1] || ""} · ${catMatch?.[1]?.trim() || ""}</div>
+        <div class="date">${dateMatch?.[1] || ""} /// ${catMatch?.[1]?.trim() || ""}</div>
         <div class="title">${titleMatch?.[1] || f}</div>
         <div class="desc">${descMatch?.[1]?.replace(/ — .+$/, "").substring(0, 80) || ""}</div>
       </a>`;
@@ -272,49 +280,58 @@ function regenerateIndex() {
 <link rel="canonical" href="${SITE_URL}/blog/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="블로그 — 클라이밍 하이프렉스">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Blog","name":"클라이밍 하이프렉스 블로그","url":"${SITE_URL}/blog/","publisher":{"@type":"Organization","name":"클라이밍 하이프렉스"}}
 </script>
 <style>
-:root{--bg:#15161A;--surface:#1C1E24;--text:#F3F1EA;--muted:#8A8D95;--line:rgba(243,241,234,.13);--primary:#E8FF35;--accent:#FF3B2F;--on-primary:#0F1013}
+:root{--concrete:#15161A;--concrete-2:#0F1013;--panel:#1B1D23;--chalk:#F3F1EA;--fog:#888B93;--line:rgba(243,241,234,.13);--primary:#E8FF35;--accent:#FF3B2F;--bg:#15161A;--ink:#0F1013;--mono:'Space Mono',ui-monospace,monospace;--disp:'Anton',sans-serif;--kr:'Pretendard',-apple-system,sans-serif;--surface:#1C1E24;--text:#F3F1EA;--muted:#8A8D95;--on-primary:#0F1013}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+body{font-family:var(--kr);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.03;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 a{color:inherit;text-decoration:none}
-nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(21,22,26,.88);backdrop-filter:blur(10px);z-index:10}
+.ticker{background:var(--primary);color:var(--ink);overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;padding:6px 0;text-transform:uppercase}
+.ticker-track{display:inline-block;animation:ticker-scroll 30s linear infinite}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(21,22,26,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:10}
 .navin{max-width:880px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:900;font-size:18px;letter-spacing:-.5px}
-.navlinks{display:flex;gap:18px;font-weight:700;font-size:13px}
-.navlinks a{color:var(--muted)}.navlinks a:hover{color:var(--primary)}
+.brand{font-family:var(--disp);font-size:22px;letter-spacing:1px;color:var(--text);text-transform:uppercase;text-decoration:none}
+.brand .dot{color:var(--primary)}
+.nav-cta{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:8px 18px;background:var(--primary);color:var(--ink);text-decoration:none;transition:.15s}
+.nav-cta:hover{opacity:.88;text-decoration:none;transform:translateY(-1px)}
 .wrap{max-width:880px;margin:0 auto;padding:0 24px}
 .blog-hero{padding:60px 0 36px;border-bottom:1px solid var(--line);margin-bottom:32px}
-.blog-hero .tag{font-size:13px;font-weight:800;letter-spacing:1.5px;color:var(--primary);text-transform:uppercase}
-.blog-hero h1{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:-1.5px;margin-top:12px}
-.blog-hero p{color:var(--muted);font-size:15px;margin-top:10px;max-width:500px}
+.blog-hero .tag{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:2px;color:var(--primary);text-transform:uppercase}
+.blog-hero h1{font-family:var(--disp);font-size:clamp(48px,10vw,96px);letter-spacing:2px;text-transform:uppercase;margin-top:12px;line-height:1}
+.blog-hero p{color:var(--muted);font-size:15px;margin-top:14px;max-width:500px}
 .post-list{display:grid;gap:14px;padding-bottom:60px}
-.post-card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 26px;transition:.18s}
-.post-card:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:0 12px 32px rgba(0,0,0,.08)}
-.post-card .date{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.3px}
-.post-card .title{font-size:19px;font-weight:900;letter-spacing:-.5px;margin:7px 0 8px;line-height:1.35}
+.post-card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 26px;transition:.18s}
+.post-card:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:0 12px 32px rgba(0,0,0,.25)}
+.post-card .date{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--fog);letter-spacing:1px;text-transform:uppercase}
+.post-card .title{font-size:19px;font-weight:900;letter-spacing:-.5px;margin:7px 0 8px;line-height:1.35;color:var(--chalk)}
 .post-card .desc{font-size:14px;color:var(--muted);line-height:1.6}
-footer{border-top:1px solid var(--line);padding:24px;text-align:center;font-size:12px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:24px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.5px}
 </style>
 </head>
 <body>
-<nav><div class="navin"><a href="/" class="brand">HIGHFLEX.</a><div class="navlinks"><a href="/">홈</a><a href="/blog/">블로그</a><a href="tel:031-922-8848">전화</a></div></div></nav>
+<div class="ticker"><div class="ticker-track">CLIMBING HIGH FLEX /// ILSAN BOULDERING /// 031-922-8848 /// CLIMBINGSTUDIOS.COM /// CLIMBING HIGH FLEX /// ILSAN BOULDERING /// 031-922-8848 /// CLIMBINGSTUDIOS.COM /// CLIMBING HIGH FLEX /// ILSAN BOULDERING /// 031-922-8848 /// CLIMBINGSTUDIOS.COM /// CLIMBING HIGH FLEX /// ILSAN BOULDERING /// 031-922-8848 /// CLIMBINGSTUDIOS.COM /// </div></div>
+<nav><div class="navin"><a href="/" class="brand">HIGHFLEX<span class="dot">.</span></a><a href="https://map.naver.com/p/entry/place/1415029947?placePath=%2Fticket" target="_blank" rel="noopener" class="nav-cta">Reserve</a></div></nav>
 <div class="wrap">
   <div class="blog-hero">
-    <div class="tag">Blog</div>
-    <h1>하이프렉스 블로그</h1>
-    <p>일산 소식, 클라이밍 가이드, 운동·건강 정보를 매일 업데이트합니다.</p>
+    <div class="tag">/// Blog</div>
+    <h1>BLOG</h1>
+    <p>일산 소식, 클라이밍 가이드, 운동 정보를 매일 업데이트합니다.</p>
   </div>
   <div class="post-list">
-${cards || '    <p style="color:var(--muted);text-align:center;padding:40px 0">아직 포스트가 없습니다. 곧 시작됩니다!</p>'}
+${cards || '    <p style="color:var(--muted);text-align:center;padding:40px 0">아직 포스트가 없습니다. 곳 시작됩니다!</p>'}
   </div>
 </div>
-<footer>© 2026 클라이밍 하이프렉스 — climbingstudios.com</footer>
+<footer>&copy; 2026 CLIMBING HIGHFLEX &mdash; climbingstudios.com</footer>
 </body>
 </html>`;
 
