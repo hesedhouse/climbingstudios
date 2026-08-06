@@ -220,6 +220,10 @@ article ul,article ol{margin:12px 0 20px 24px;font-size:15px;color:var(--muted)}
 article li{margin-bottom:6px}
 .back{display:inline-block;margin-top:40px;padding:12px 24px;border:2px solid var(--line);font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none}
 .back:hover{border-color:var(--primary);color:var(--primary);text-decoration:none}
+.cta-reserve{margin-top:48px;padding:32px;background:var(--surface);border:1px solid var(--line);border-radius:16px;text-align:center}
+.cta-reserve p{font-size:15px;color:var(--muted);margin-bottom:16px}
+.cta-reserve .btn{display:inline-block;padding:14px 36px;background:var(--primary);color:var(--on-primary);font-weight:800;font-size:15px;border-radius:8px;text-decoration:none;letter-spacing:-.3px;transition:.15s}
+.cta-reserve .btn:hover{opacity:.88;text-decoration:none;transform:translateY(-1px)}
 footer{border-top:1px solid var(--line);padding:24px;text-align:center;font-size:12px;color:var(--muted)}
 </style>
 </head>
@@ -227,6 +231,10 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;font-size
 <nav><div class="navin"><a href="/" class="brand">HIGHFLEX.</a><div class="navlinks"><a href="/">홈</a><a href="/blog/">블로그</a><a href="tel:031-922-8848">전화</a></div></div></nav>
 <div class="post-wrap">
 ${article}
+<div class="cta-reserve">
+  <p>하이프렉스 클라이밍짐이 궁금하다면?</p>
+  <a href="https://map.naver.com/p/entry/place/1415029947?placePath=%2Fticket" target="_blank" rel="noopener" class="btn">네이버 예약하기 →</a>
+</div>
 <a href="/blog/" class="back">← 목록으로</a>
 </div>
 <footer>© 2026 클라이밍 하이프렉스 — climbingstudios.com</footer>
