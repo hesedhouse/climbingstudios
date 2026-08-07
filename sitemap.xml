@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://climbingstudios.com/blog/</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -69,6 +69,12 @@
   <url>
     <loc>https://climbingstudios.com/blog/2026-08-06-직장인-취미로-클라이밍이-딱인-5가지-이유.html</loc>
     <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://climbingstudios.com/blog/2026-08-07-일산-여름-피서-코스-추천-이번-주말-여기-가세요.html</loc>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
