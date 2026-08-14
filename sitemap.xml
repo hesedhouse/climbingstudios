@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://climbingstudios.com/blog/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -111,6 +111,12 @@
   <url>
     <loc>https://climbingstudios.com/blog/2026-08-13-클라이밍-기본-무브-5가지-초보-필수-정리.html</loc>
     <lastmod>2026-08-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://climbingstudios.com/blog/2026-08-14-클라이밍-전후-스트레칭-루틴-완벽-정리.html</loc>
+    <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
