@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://climbingstudios.com/blog/</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -123,6 +123,12 @@
   <url>
     <loc>https://climbingstudios.com/blog/2026-08-15-실내-클라이밍장-고를-때-꼭-확인해야-할-시설-체크리스트.html</loc>
     <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://climbingstudios.com/blog/2026-08-16-클라이밍-데이트-왜-자꾸-추천받는-걸까.html</loc>
+    <lastmod>2026-08-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
