@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://climbingstudios.com/blog/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -393,6 +393,12 @@
   <url>
     <loc>https://climbingstudios.com/blog/2026-10-05-클라이밍-모임-어떻게-시작하면-될까요.html</loc>
     <lastmod>2026-10-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://climbingstudios.com/blog/2026-10-06-일산-고양시-10월-축제이벤트-총정리.html</loc>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
